@@ -5,7 +5,7 @@ from scipy import sparse
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LogisticRegression
+from sklearn.svm import LinearSVC
 import os
 
 from data_processing import load_and_merge_data, process_structural_features, clean_signature_for_ngrams
@@ -59,13 +59,12 @@ def prepare_and_train():
     X_test = sparse.hstack([X_struct_test_sparse, X_ngram_test], format='csr')
 
     # 7. Train Model
-    print("Training Logistic Regression model...")
-    model = LogisticRegression(
-        max_iter=2000, 
+    print("Training Support Vector Machine (LinearSVC) model...")
+    model = LinearSVC(
         class_weight='balanced', 
         C=1.0, 
-        solver='liblinear', 
-        random_state=42
+        random_state=42,
+        max_iter=2000
     )
     model.fit(X_train, y_train)
     print("Model training complete.")
@@ -74,7 +73,7 @@ def prepare_and_train():
     os.makedirs('../models', exist_ok=True)
     os.makedirs('../data/processed', exist_ok=True)
     
-    with open('../models/logistic_model.pkl', 'wb') as f:
+    with open('../models/svm_model.pkl', 'wb') as f:
         pickle.dump(model, f)
     with open('../models/scaler.pkl', 'wb') as f:
         pickle.dump(scaler, f)

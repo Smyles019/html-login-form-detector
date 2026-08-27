@@ -35,7 +35,7 @@ def evaluate_and_interpret():
     y_test = np.load('../data/processed/y_test.npy')
     
     # Load model and vectorizer
-    with open('../models/logistic_model.pkl', 'rb') as f:
+    with open('../models/svm_model.pkl', 'rb') as f:
         model = pickle.load(f)
     with open('../models/ngram_vectorizer.pkl', 'rb') as f:
         vectorizer = pickle.load(f)

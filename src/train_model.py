@@ -12,8 +12,8 @@ from data_processing import load_and_merge_data, process_structural_features, cl
 
 def prepare_and_train():
     # 1. Load Data
-    file_path_1 = '../data/raw/Dataset 1/train_login_form.csv'
-    file_path_2 = '../data/raw/Dataset 1/train_no_form.csv'
+    file_path_1 = 'data/raw/Dataset 1/train_login_form.csv'
+    file_path_2 = 'data/raw/Dataset 1/train_no_form.csv'
     df = load_and_merge_data(file_path_1, file_path_2)
 
     # 2. Extract Features
@@ -70,18 +70,18 @@ def prepare_and_train():
     print("Model training complete.")
 
     # 8. Save Artifacts for Evaluation
-    os.makedirs('../models', exist_ok=True)
-    os.makedirs('../data/processed', exist_ok=True)
+    os.makedirs('models', exist_ok=True)
+    os.makedirs('data/processed', exist_ok=True)
     
-    with open('../models/svm_model.pkl', 'wb') as f:
+    with open('models/svm_model.pkl', 'wb') as f:
         pickle.dump(model, f)
-    with open('../models/scaler.pkl', 'wb') as f:
+    with open('models/scaler.pkl', 'wb') as f:
         pickle.dump(scaler, f)
-    with open('../models/ngram_vectorizer.pkl', 'wb') as f:
+    with open('models/ngram_vectorizer.pkl', 'wb') as f:
         pickle.dump(vectorizer, f)
         
-    sparse.save_npz('../data/processed/X_test.npz', X_test)
-    np.save('../data/processed/y_test.npy', y_test)
+    sparse.save_npz('data/processed/X_test.npz', X_test)
+    np.save('data/processed/y_test.npy', y_test)
     
     print("Saved trained model, preprocessors, and test data successfully.")
 

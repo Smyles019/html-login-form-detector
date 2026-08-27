@@ -26,18 +26,18 @@ def evaluate_and_interpret():
     print("Loading test data and model artifacts...")
     
     # Check if files exist
-    if not os.path.exists('../data/processed/X_test.npz'):
-        print("Test data not found! Please run 'python train_model.py' first.")
+    if not os.path.exists('data/processed/X_test.npz'):
+        print("Test data not found! Please run 'python src/train_model.py' first.")
         return
         
     # Load test data
-    X_test = sparse.load_npz('../data/processed/X_test.npz')
-    y_test = np.load('../data/processed/y_test.npy')
+    X_test = sparse.load_npz('data/processed/X_test.npz')
+    y_test = np.load('data/processed/y_test.npy')
     
     # Load model and vectorizer
-    with open('../models/svm_model.pkl', 'rb') as f:
+    with open('models/svm_model.pkl', 'rb') as f:
         model = pickle.load(f)
-    with open('../models/ngram_vectorizer.pkl', 'rb') as f:
+    with open('models/ngram_vectorizer.pkl', 'rb') as f:
         vectorizer = pickle.load(f)
         
     # Make predictions

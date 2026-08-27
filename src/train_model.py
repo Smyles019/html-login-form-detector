@@ -64,7 +64,7 @@ def prepare_and_train():
         class_weight='balanced', 
         C=1.0, 
         random_state=42,
-        max_iter=2000
+        max_iter=5000
     )
     model.fit(X_train, y_train)
     print("Model training complete.")
